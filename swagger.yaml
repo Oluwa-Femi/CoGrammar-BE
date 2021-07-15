@@ -1,0 +1,301 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Drug_Presciption_App
+  description: An application that allows a user to keep track of their drug prescriptions
+  contact: {}
+host: drug-prescription-app.herokuapp.com
+basePath: /api/v1
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /users/register:
+    post:
+      summary: Register
+      tags:
+      - Auth
+      operationId: Register
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: firstName
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: lastName
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: age
+        in: formData
+        required: true
+        type: integer
+        format: int32
+        description: ''
+      - name: email
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: password
+        in: formData
+        required: true
+        type: integer
+        format: int32
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /users/login:
+    post:
+      summary: Login
+      tags:
+      - Auth
+      operationId: Login
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: email
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: password
+        in: formData
+        required: true
+        type: integer
+        format: int32
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /prescription/add:
+    post:
+      summary: Create-prescription
+      tags:
+      - prescriptions
+      operationId: Create-prescription
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: drug
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: unit
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: start_Date
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: end_Date
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /prescription:
+    delete:
+      summary: Delete_prescription
+      tags:
+      - prescriptions
+      operationId: Delete_prescription
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: _id
+        in: query
+        required: true
+        type: integer
+        format: int64
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+    put:
+      summary: Verify_completion
+      tags:
+      - prescriptions
+      operationId: Verify_completion
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: _id
+        in: query
+        required: true
+        type: integer
+        format: int64
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+    get:
+      summary: All_prescriptions
+      tags:
+      - prescriptions
+      operationId: All_prescriptions
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /prescription/find:
+    get:
+      summary: get_single_prescription
+      tags:
+      - prescriptions
+      operationId: get_single_prescription
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: _id
+        in: query
+        required: true
+        type: integer
+        format: int64
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /formula/add:
+    post:
+      summary: Add usage formula
+      tags:
+      - usage formula
+      operationId: Addusageformula
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: prescription_id
+        in: query
+        required: true
+        type: integer
+        format: int64
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: frequency
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: number_of_times
+        in: formData
+        required: true
+        type: integer
+        format: int32
+        description: ''
+      - name: dose
+        in: formData
+        required: true
+        type: integer
+        format: int32
+        description: ''
+      - name: before_after_meal
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: duration
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /formula:
+    get:
+      summary: Get usage formula
+      tags:
+      - usage formula
+      operationId: Getusageformula
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: _id
+        in: query
+        required: true
+        type: integer
+        format: int64
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+tags:
+- name: Auth
+- name: prescriptions
+- name: usage formula
